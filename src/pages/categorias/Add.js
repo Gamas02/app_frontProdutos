@@ -20,15 +20,15 @@ export default function Add() {
     if (!res.ok) {
       const txt = await res.text();
       console.error("RESPOSTA DO BACKEND:", txt);
-      alert("Erro ao cadastrar produto. Veja o console.");
+      alert("Erro ao cadastrar categoria. Veja o console.");
       return;
     }
 
     setNome("");
 
-    alert("Produto cadastrado!");
+    alert("Categoria cadastrada!");
   } catch (error) {
-    console.error("Erro ao adicionar produto:", error);
+    console.error("Erro ao adicionar categoria:", error);
   }
 };
 
@@ -37,7 +37,7 @@ export default function Add() {
     <div className="page-container">
       <h1 className="title">Cadastrar Produto</h1>
 
-      <form onSubmit={addProduto} className="form-card">
+      <form onSubmit={addCategorias} className="form-card">
 
         <div>
           <label>Nome</label>

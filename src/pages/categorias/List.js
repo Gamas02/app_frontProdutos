@@ -27,7 +27,7 @@ export default function Categorias() {
     fetchCategorias();
   }, []);
 
-  const deleteCategorias = async (id) => {
+  const deleteCategoria = async (id) => {
     try {
       const response = await fetch(`http://localhost:4567/categorias/${id}`, {
         method: "DELETE",
@@ -35,7 +35,7 @@ export default function Categorias() {
 
       if (!response.ok) throw new Error("Erro ao deletar produto");
 
-      setCategorias(categorias.filter((u) => u.id !== id));
+      setCategoria(categorias.filter((u) => u.id !== id));
     } catch (error) {
       console.error("Erro ao deletar categoria:", error);
     }
@@ -51,7 +51,7 @@ export default function Categorias() {
         <p className="empty">Nenhuma categoria encontrada</p>
       ) : (
         <div className="card-list">
-          {categoria.map((produto) => (
+          {categorias.map((categoria) => (
             <div className="categoria-card" key={categoria.id}>
               <div className="categoria-info">
                 <h3>{categoria.nome}</h3>

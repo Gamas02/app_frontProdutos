@@ -111,13 +111,14 @@ body {
   filter: brightness(1.2);
 }
 
-/* LISTA DE PRODUTOS */
+/* LISTA — GRID PADRÃO */
 .card-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
 
+/* PRODUTOS */
 .produto-card {
   background: var(--card);
   padding: 20px;
@@ -143,13 +144,36 @@ body {
   color: var(--text-light);
 }
 
+/* CATEGORIAS — mesmo estilo dos produtos */
+.categoria-card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  transition: transform var(--transition);
+}
+
+.categoria-card:hover {
+  transform: scale(1.03);
+}
+
+.categoria-info h3 {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+  color: var(--text);
+}
+
+/* BOTÕES LISTA */
 .actions {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
 
-/* FORMULÁRIOS */
+/* FORM*/
 .form-card {
   background: var(--card);
   padding: 30px;
@@ -186,7 +210,7 @@ body {
   background: #222;
 }
 
-/* botão dentro de form */
+/* botão dentro do form */
 .form-card .btn.create {
   width: 100%;
   padding: 12px;

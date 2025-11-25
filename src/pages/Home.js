@@ -8,7 +8,7 @@ export default function Home() {
         <h1 className="title home-title">Gerenciador de produtos e categorias</h1>
 
         <p className="home-subtitle">
-          por: <a href="https://github.com/Gamas02">Gamas02</a>
+          por: <a href="https://github.com/Gamas02">Gamas02</a> e <a href="https://github.com/Viganop">Viganop</a>
         </p>
 
         {/* PRODUTOS */}
