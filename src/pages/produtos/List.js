@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Produtos() {
-  const [users, setProduto] = useState([]);
+  const [produtos, setProduto] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -29,13 +29,13 @@ export default function Produtos() {
 
   const deleteProduto = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/produtos/${id}`, {
+      const response = await fetch(`http://localhost:4567/produtos/${id}`, {
         method: "DELETE",
       });
 
       if (!response.ok) throw new Error("Erro ao deletar produto");
 
-      setProduto(users.filter((u) => u.id !== id));
+      setProduto(produtos.filter((u) => u.id !== id));
     } catch (error) {
       console.error("Erro ao deletar produto:", error);
     }
@@ -47,28 +47,30 @@ export default function Produtos() {
 
       {loading ? (
         <p className="loading">Carregando...</p>
-      ) : users.length === 0 ? (
+      ) : produtos.length === 0 ? (
         <p className="empty">Nenhum produto encontrado</p>
       ) : (
         <div className="card-list">
-          {users.map((user) => (
-            <div className="produto-card" key={user.id}>
+          {produtos.map((produto) => (
+            <div className="produto-card" key={produto.id}>
               <div className="produto-info">
-                <h3>{user.name}</h3>
-                <p>{user.email}</p>
+                <h3>{produto.nome}</h3>
+                <p>Preço: R$ {produto.preco}</p>
+                <p>Estoque: {produto.estoque}</p>
+                <p>Categoria: {produto.categoria ? produto.categoria.nome : "Sem categoria"}</p>
               </div>
 
               <div className="actions">
                 <button
                   className="btn edit"
-                  onClick={() => navigate(`/edit/${user.id}`)}
+                  onClick={() => navigate(`/edit/${produto.id}`)}
                 >
                   Editar
                 </button>
 
                 <button
                   className="btn delete"
-                  onClick={() => deleteProduto(user.id)}
+                  onClick={() => deleteProduto(produto.id)}
                 >
                   Excluir
                 </button>
