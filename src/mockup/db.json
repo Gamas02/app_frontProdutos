@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "nome": "Teclado",
+      "preco": "12.99",
+      "estoque": "4",
+      "categoria": "Eletronicos"
+    }
+  ]
+}

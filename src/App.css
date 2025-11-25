@@ -1,0 +1,195 @@
+:root {
+  --bg: #1f1f1f;
+  --bg-light: #2a2a2a;
+  --card: #2e2e2e;
+  --primary: #4da3ff;
+  --danger: #ff4d4d;
+  --success: #4dff79;
+  --text: #f1f1f1;
+  --text-light: #cfcfcf;
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+/* GLOBAL */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.page-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.loading, .empty {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+/* HOME */
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.home-box {
+  background: var(--bg-light);
+  padding: 40px;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.home-title {
+  margin-bottom: 10px;
+}
+
+.home-subtitle {
+  color: var(--text-light);
+  margin-bottom: 30px;
+}
+
+.home-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.home-btn {
+  width: 180px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+  display: inline-block;
+}
+
+.btn.create {
+  background: var(--success);
+}
+.btn.create:hover {
+  filter: brightness(1.1);
+}
+
+.btn.edit {
+  background: var(--primary);
+}
+.btn.edit:hover {
+  filter: brightness(1.2);
+}
+
+.btn.delete {
+  background: var(--danger);
+}
+.btn.delete:hover {
+  filter: brightness(1.2);
+}
+
+/* LISTA DE PRODUTOS */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.produto-card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  transition: transform var(--transition);
+}
+
+.produto-card:hover {
+  transform: scale(1.03);
+}
+
+.produto-info h3 {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+}
+
+.produto-info p {
+  margin: 0;
+  color: var(--text-light);
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* FORMULÁRIOS */
+.form-card {
+  background: var(--card);
+  padding: 30px;
+  border-radius: var(--radius);
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 0 20px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-card label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid #444;
+  background: #1d1d1d;
+  color: var(--text);
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.input:focus {
+  border-color: var(--primary);
+  outline: none;
+  background: #222;
+}
+
+/* botão dentro de form */
+.form-card .btn.create {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 1.1rem;
+}
