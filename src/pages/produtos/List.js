@@ -63,7 +63,7 @@ export default function Produtos() {
               <div className="actions">
                 <button
                   className="btn edit"
-                  onClick={() => navigate(`/edit/${produto.id}`)}
+                  onClick={() => navigate(`/produtos/edit/${produto.id}`)}
                 >
                   Editar
                 </button>

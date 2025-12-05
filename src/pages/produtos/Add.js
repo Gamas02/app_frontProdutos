@@ -1,61 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Add() {
   const [nome, setNome] = useState("");
   const [preco, setPreco] = useState("");
   const [estoque, setEstoque] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [categorias, setCategorias] = useState([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const res = await fetch("http://localhost:4567/categorias");
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        setCategorias(data || []);
+      } catch (error) {
+        console.error("Erro ao carregar categorias:", error);
+      }
+    };
+
+    fetchCategorias();
+  }, []);
 
   const addProduto = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!nome.trim() || !preco.trim() || !estoque.trim() || !categoria.trim()) return;
+    if (!nome || !preco || !estoque || !categoria) return;
 
-  try {
-    const res = await fetch("http://localhost:4567/produtos", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nome,
-        preco: parseFloat(preco),
-        estoque: parseInt(estoque),
-        categoria: { id: parseInt(categoria) }
-      }),
-    });
+    try {
+      const res = await fetch("http://localhost:4567/produtos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome,
+          preco: Number(preco),
+          estoque: Number(estoque),
+          categoria: { id: Number(categoria) },
+        }),
+      });
 
-    if (!res.ok) {
-      const txt = await res.text();
-      console.error("RESPOSTA DO BACKEND:", txt);
-      alert("Erro ao cadastrar produto. Veja o console.");
-      return;
+      if (!res.ok) {
+        const txt = await res.text();
+        console.error("RESPOSTA DO BACKEND:", txt);
+        return;
+      }
+
+      navigate("/produtos");
+    } catch (error) {
+      console.error("Erro ao adicionar produto:", error);
     }
-
-    setNome("");
-    setPreco("");
-    setEstoque("");
-    setCategoria("");
-
-    alert("Produto cadastrado!");
-  } catch (error) {
-    console.error("Erro ao adicionar produto:", error);
-  }
-};
-
+  };
 
   return (
     <div className="page-container">
       <h1 className="title">Cadastrar Produto</h1>
 
       <form onSubmit={addProduto} className="form-card">
-
         <div>
           <label>Nome</label>
           <input
             className="input"
             type="text"
-            placeholder="Digite nome do produto"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
+            required
           />
         </div>
 
@@ -63,10 +74,10 @@ export default function Add() {
           <label>Preço</label>
           <input
             className="input"
-            type="text"
-            placeholder="Digite preço do produto"
+            type="number"
             value={preco}
             onChange={(e) => setPreco(e.target.value)}
+            required
           />
         </div>
 
@@ -75,21 +86,28 @@ export default function Add() {
           <input
             className="input"
             type="number"
-            placeholder="Quant. Estoque"
             value={estoque}
             onChange={(e) => setEstoque(e.target.value)}
+            required
           />
         </div>
 
         <div>
-          <label>Categoria</label>
-          <input
+          <label>Categoria:</label>
+          <select
             className="input"
-            type="text"
-            placeholder="Digite a categoria produto"
             value={categoria}
             onChange={(e) => setCategoria(e.target.value)}
-          />
+            required
+          >
+            <option value="">Selecione uma categoria</option>
+
+            {categorias.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.nome || cat.nome_categoria}
+              </option>
+            ))}
+          </select>
         </div>
 
         <button className="btn create" type="submit">

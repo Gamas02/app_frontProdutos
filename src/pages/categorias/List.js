@@ -60,7 +60,7 @@ export default function Categorias() {
               <div className="actions">
                 <button
                   className="btn edit"
-                  onClick={() => navigate(`/edit/${categoria.id}`)}
+                  onClick={() => navigate(`/categorias/edit/${categoria.id}`)}
                 >
                   Editar
                 </button>
